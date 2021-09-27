@@ -2,10 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require('cors')
-
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-
 const config = require("./config/key");
 
 // const mongoose = require("mongoose");
@@ -14,23 +11,24 @@ const config = require("./config/key");
 //   .then(() => console.log("DB connected"))
 //   .catch(err => console.error(err));
 
-const mongoose = require("mongoose");
-const connect = mongoose.connect(config.mongoURI,
-  {
-    useNewUrlParser: true, useUnifiedTopology: true,
-    useCreateIndex: true, useFindAndModify: false
+const mongoose = require('mongoose');
+mongoose
+  .connect(config.mongoURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.log(err));
+  .catch(err => console.log(err)); // 몽고DB가 잘 연결됬는지 확인용
 
 app.use(cors())
 
-//to not get any deprecation warning or error
-//support parsing of application/x-www-form-urlencoded post data
-app.use(bodyParser.urlencoded({ extended: true }));
-//to get json data
-// support parsing of application/json type post data
-app.use(bodyParser.json());
+// body-parser
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// cookieParser
 app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
@@ -48,8 +46,11 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 
   // index.html for all page routes    html or routing and naviagtion
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+  // });
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../client/public", "index.html"));
   });
 }
 
