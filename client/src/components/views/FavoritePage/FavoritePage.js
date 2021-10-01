@@ -7,7 +7,7 @@ function FavoritePage(props) {
 
   useEffect(() => {
     Axios.post('./api/favorite/getFavoriedMovie', {
-      useForm: localStorage.getItem('userId'),
+      userFrom: localStorage.getItem('userId'),
     }).then(res_data => {
       if (res_data.data.success) {
         setFavorites(res_data.data.favorite);
@@ -15,7 +15,7 @@ function FavoritePage(props) {
         alert('영화 정보를 가져오는데 실패했습니다.');
       }
     });
-  });
+  }, []);
 
   return (
     <div style={{ width: '85%', margin: '3rem auto' }}>

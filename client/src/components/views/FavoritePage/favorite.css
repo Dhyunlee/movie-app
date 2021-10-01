@@ -11,5 +11,7 @@ td, th {
 }
 
 tr:nth-child(even) {
+    position: absolute;
     background-color: #ddd;
 }
+
