@@ -51,6 +51,7 @@ function LandingPage() {
             Movies.map((movie, idx) => (
               <React.Fragment key={idx}>
                 <GridCards
+                  LandingPage
                   image={
                     movie.poster_path
                       ? `${IMAGE_BASE_URL}w500${movie.poster_path}`
