@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 // router
 app.use('/api/users', require('./routes/users'));
-app.use('/api/favorte', require('./routes/favorite'));
+app.use('/api/favorite', require('./routes/favorite'));
 
 
 //use this to show the image you have in node js server to client (react js)
