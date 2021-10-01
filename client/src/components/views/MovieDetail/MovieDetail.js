@@ -23,10 +23,7 @@ function MovieDetail(props) {
 
     fetch(endpointCrew)
       .then(res => res.json())
-      .then(res_data => {
-        console.log(res_data.cast);
-        setCasts(res_data.cast);
-      });
+      .then(res_data => setCasts(res_data.cast));
   }, []);
 
   const ToggleActorView = () => {
