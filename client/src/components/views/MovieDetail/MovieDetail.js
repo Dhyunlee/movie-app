@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { API_KEY, API_URL, IMAGE_BASE_URL } from '../../Config';
 import GridCards from '../commons/GridCards';
 import MainImage from '../LandingPage/Sections/MainImage';
+import Favorite from './Sections/Favorite';
 import MovieInfo from './Sections/MovieInfo';
 
 function MovieDetail(props) {
@@ -43,7 +44,16 @@ function MovieDetail(props) {
       />
 
       {/* Body */}
-      <div style={{ width: '85%', margin: '1rem auth' }}>
+      <div style={{ width: '85%', margin: '1rem auto' }}>
+        
+        <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
+            <Favorite 
+              movieInfo={Movie} 
+              moviedId={moviedId}
+              userFrom={localStorage.getItem('userId')}
+            />
+        </div>
+       
         {/* Movie Info */}
         <MovieInfo movie={Movie} />
 
